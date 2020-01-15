@@ -27,8 +27,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
+ 
+  
     String output = "0";
 
     String _output = "0";
@@ -62,17 +62,27 @@ class _MyHomePageState extends State<MyHomePage> {
       else if(buttonText == "="){
         num2 = double.parse(output);
 
-        if(operand == "+"){
-          _output = (num1 + num2).toString();
-        }
-        if(operand == "-"){
-          _output = (num1 - num2).toString();
-        }
-        if(operand == "*"){
-          _output = (num1 * num2).toString();
-        }
-        if(operand == "/"){
-          _output = (num1 / num2).toString();
+        // if(operand == "+"){
+        //   _output = (num1 + num2).toString();
+        // }
+        // if(operand == "-"){
+        //   _output = (num1 - num2).toString();
+        // }
+        // if(operand == "*"){
+        //   _output = (num1 * num2).toString();
+        // }
+        // if(operand == "/"){
+        //   _output = (num1 / num2).toString();
+        // }
+        switch(operand){
+          case "+": _output = (num1 + num2).toString();
+                    break;
+          case "-": _output = (num1 - num2).toString();
+                    break;
+          case "*": _output = (num1 * num2).toString();
+                    break;
+          case "/": _output = (num1 / num2).toString();
+                    break;
         }
 
         num1 = 0; 
@@ -90,9 +100,9 @@ class _MyHomePageState extends State<MyHomePage> {
       });
     }
 
-    Widget buildButton(String buttonText) {
+    Widget buildButtonNumber(String buttonText) {
       return new Expanded(
-        child: new OutlineButton(
+        child: new MaterialButton(
           padding: EdgeInsets.all(24.0),
           child: new Text(
             buttonText,
@@ -102,10 +112,64 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           onPressed: () => buttonPressed(buttonText),
+          color: Colors.white,
         ),
       );
     }
 
+    Widget buildButtonOperand(String buttonText) {
+      return new Expanded(
+        child: new MaterialButton(
+          padding: EdgeInsets.all(24.0),
+          child: new Text(
+            buttonText,
+            style: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          onPressed: () => buttonPressed(buttonText),
+          color: Colors.yellow,
+        ),
+      );
+    }
+
+    Widget buildButtonEquals(String buttonText) {
+      return new Expanded(
+        child: new MaterialButton(
+          padding: EdgeInsets.all(24.0),
+          child: new Text(
+            buttonText,
+            style: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          onPressed: () => buttonPressed(buttonText),
+          color: Colors.green,
+        ),
+      );
+    }
+
+    Widget buildButtonClear(String buttonText) {
+      return new Expanded(
+        child: new MaterialButton(
+          padding: EdgeInsets.all(24.0),
+          child: new Text(
+            buttonText,
+            style: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          onPressed: () => buttonPressed(buttonText),
+          color: Colors.red,
+        ),
+      );
+    }
+
+   @override
+  Widget build(BuildContext context){
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
@@ -128,32 +192,31 @@ class _MyHomePageState extends State<MyHomePage> {
               new Column(
                 children: [
                   new Row(children: [
-                    buildButton("7"),
-                    buildButton("8"),
-                    buildButton("9"),
-                    buildButton("/")
+                    buildButtonNumber("7"),
+                    buildButtonNumber("8"),
+                    buildButtonNumber("9"),
+                    buildButtonOperand("/")
                   ]),
                   new Row(children: [
-                    buildButton("4"),
-                    buildButton("5"),
-                    buildButton("6"),
-                    buildButton("*")
+                    buildButtonNumber("4"),
+                    buildButtonNumber("5"),
+                    buildButtonNumber("6"),
+                    buildButtonOperand("X")
                   ]),
                   new Row(children: [
-                    buildButton("1"),
-                    buildButton("2"),
-                    buildButton("3"),
-                    buildButton("-")
+                    buildButtonNumber("1"),
+                    buildButtonNumber("2"),
+                    buildButtonNumber("3"),
+                    buildButtonOperand("-")
                   ]),
                   new Row(children: [
-                    buildButton("."),
-                    buildButton("0"),
-                    buildButton("00"),
-                    buildButton("+")
+                    buildButtonNumber("."),
+                    buildButtonNumber("0"),
+                    buildButtonClear("AC"),
+                    buildButtonOperand("+")
                   ]),
                   new Row(children: [
-                    buildButton("CLEAR"),
-                    buildButton("="),
+                    buildButtonEquals("="),
                   ]),
                 ],
               )
