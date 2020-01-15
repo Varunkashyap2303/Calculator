@@ -62,18 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
       else if(buttonText == "="){
         num2 = double.parse(output);
 
-        // if(operand == "+"){
-        //   _output = (num1 + num2).toString();
-        // }
-        // if(operand == "-"){
-        //   _output = (num1 - num2).toString();
-        // }
-        // if(operand == "*"){
-        //   _output = (num1 * num2).toString();
-        // }
-        // if(operand == "/"){
-        //   _output = (num1 / num2).toString();
-        // }
+        
         switch(operand){
           case "+": _output = (num1 + num2).toString();
                     break;
